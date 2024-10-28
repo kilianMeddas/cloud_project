@@ -1,0 +1,26 @@
+1) créer un network 
+
+docker network create my_network
+
+2) créezr un volume
+docker volume create redis_data
+
+3) lancer docker redis avec le volume créer précédemment
+docker run -d --name redis --network my_network -v redis_data:/data redis
+
+4)Après avoir build le docker de l'app, le run. 
+docker run -d --name kilian --network my_network -p 5000:5000 kilian
+
+Tester la commande pour la connection:
+
+curl http://localhost:5000/products
+
+curl -X POST http://localhost:5000/products -H "Content-Type: application/json" -d '{"name": "voiture", "price": 10.99}'
+
+
+# Taguer l'image
+docker tag kilian kmeddas/kilian:latest
+
+# Pousser l'image vers Docker Hub
+docker push kmeddas/kilian:latest
+

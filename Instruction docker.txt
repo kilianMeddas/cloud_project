@@ -1,0 +1,24 @@
+Pour créer un docker:
+
+Il faut un dockerfile (voire celui du stage à la gendarmerie) 
+Un fichier requierement (optionnel)
+
+Taper la commande:
+
+docker build -t nom_de_l'image path_de_l'image (les fichiers disponibles dépendent des dossiers et donc du path)
+
+
+puis pour run : 
+
+docker run --gpus all --rm -it -v path_du_dockeur:/workspace nom_de_l'image
+
+Exemple:
+
+docker run --gpus all --rm -it -v .\Desktop\Stage_Gendarmerie_Nationale\IA_Pedago\IA_PEDAGO_test_finale\:/workspace oapia
+
+attention : "--gpus all" possible uniquement si des gpus sont available
+
+
+si nécéssité d'utiliser un port de sortie (pour stremlit par exemple) : 
+
+docker run --gpus all --rm -it -p 8501:8501 -v .\Desktop\Stage_Gendarmerie_Nationale\IA_Pedago\IA_PEDAGO_test_finale\:/workspace oapia
