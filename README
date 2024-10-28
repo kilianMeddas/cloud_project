@@ -9,7 +9,7 @@ docker volume create redis_data
 docker run -d --name redis --network my_network -v redis_data:/data redis
 
 4)Après avoir build le docker de l'app, le run. 
-docker run -d --name kilian --network my_network -p 5000:5000 name_image
+docker run --name kilian --network my_network -p 5000:5000 name_image
 
 Tester la commande pour la connection:
 
