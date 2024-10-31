@@ -1,40 +1,46 @@
-Prérequis : image redis sur docker (faire docker pull redis) 
+# Docker Setup Guide for Redis and Flask Application
 
+## Prerequisites
+1. Pull the Redis image on Docker:
+    ```bash
+    docker pull redis
+    ```
 
-Instruction pour le bon fonctionnement :
+## Instructions
 
-* créer un network 
+1. **Create a Docker network:**
+    ```bash
+    docker network create my_network
+    ```
 
-```bash
-docker network create my_network
-```
+2. **Create a Docker volume:**
+    ```bash
+    docker volume create redis_data
+    ```
 
-* créer un volume
+3. **Run the Redis container with the created volume:**
+    ```bash
+    docker run -d --name redis --network my_network -v redis_data:/data redis
+    ```
 
-```bash
-docker volume create redis_data
-```
+4. **Build and run the Flask application container:**
+    - After building the Docker image for the app, run it with the following command:
+        ```bash
+        docker run --name kilian --network my_network -p 5000:5000 kmeddas/cloud
+        ```
 
-* lancer docker redis avec le volume créer précédemment
+5. **Test the application:**
+    - To test the connection to the app, use these commands:
+        ```bash
+        curl http://localhost:5000/products
 
-```bash
-docker run -d --name redis --network my_network -v redis_data:/data redis
-```
+        curl -X POST http://localhost:5000/products -H "Content-Type: application/json" -d '{"name": "xxx", "price": xxx}'
+        ```
 
-* Après avoir build le docker de l'app, le run. 
+6. **Restart the container:**
+    - After the first run, to start the containers again, use:
+        ```bash
+        docker start <container_name>
+        ```
 
-```bash
-docker run --name kilian --network my_network -p 5000:5000 kmeddas/cloud
-```
-
-* Tester la commande pour la connection
-
-```bash
-curl http://localhost:5000/products
-
-curl -X POST http://localhost:5000/products -H "Content-Type: application/json" -d '{"name": "xxx", "price": xxx}'
-```
-
-* Une fois run pour la première fois, pour rerun
-
-utilisé docker start nom_container
+> **Note:** Replace `<container_name>` with the actual name of the container to restart.
