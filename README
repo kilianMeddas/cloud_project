@@ -1,26 +1,40 @@
-1) créer un network 
+Prérequis : image redis sur docker (faire docker pull redis) 
 
+
+Instruction pour le bon fonctionnement :
+
+* créer un network 
+
+```bash
 docker network create my_network
+```
 
-2) créezr un volume
+* créer un volume
+
+```bash
 docker volume create redis_data
+```
 
-3) lancer docker redis avec le volume créer précédemment
+* lancer docker redis avec le volume créer précédemment
+
+```bash
 docker run -d --name redis --network my_network -v redis_data:/data redis
+```
 
-4)Après avoir build le docker de l'app, le run. 
-docker run --name kilian --network my_network -p 5000:5000 name_image
+* Après avoir build le docker de l'app, le run. 
 
-Tester la commande pour la connection:
+```bash
+docker run --name kilian --network my_network -p 5000:5000 kmeddas/cloud
+```
 
+* Tester la commande pour la connection
+
+```bash
 curl http://localhost:5000/products
 
 curl -X POST http://localhost:5000/products -H "Content-Type: application/json" -d '{"name": "xxx", "price": xxx}'
+```
 
+* Une fois run pour la première fois, pour rerun
 
-# Taguer l'image
-docker tag kilian kmeddas/kilian:latest
-
-# Pousser l'image vers Docker Hub
-docker push kmeddas/kilian:latest
-
+utilisé docker start nom_container
