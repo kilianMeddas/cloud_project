@@ -43,7 +43,7 @@
     ```
 
     ```bash
-    curl -X POST http://localhost:5000/products -H "Content-Type: application/json" -d '{"name": "xxx", "price": xxx}'
+    curl -X POST http://localhost:5000/products -H "Content-Type: application/json" -d '{"name": "banane", "price": 69}'
     ```
 
 6. **Restart the container:**
